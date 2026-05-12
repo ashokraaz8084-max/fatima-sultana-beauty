@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Fatima Sultana Ladies Beauty Saloon"
+version = "1.0.0"
+id = "artifacts/fatima-sultana-salon"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 23381
+
+[services.development]
+run = "pnpm --filter @workspace/fatima-sultana-salon run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fatima-sultana-salon", "run", "build" ]
+publicDir = "artifacts/fatima-sultana-salon/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "23381"
+BASE_PATH = "/"

@@ -1,0 +1,62 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "iCqLLcxpourxUB1998hY9"
+uri = "file://artifacts/fatima-sultana-salon/public/images/hero.png"
+type = "image"
+title = "Hero salon interior"
+
+[[generated]]
+id = "hZBoeGvUJxkQn8akz382V"
+uri = "file://artifacts/fatima-sultana-salon/public/images/about.png"
+type = "image"
+title = "About facial treatment"
+
+[[generated]]
+id = "RcO3yoGprLeKtASm1MjrX"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-henna.png"
+type = "image"
+title = "Service henna"
+
+[[generated]]
+id = "z6FwGGFZmMajhcbWzs09B"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-haircut.png"
+type = "image"
+title = "Service haircut"
+
+[[generated]]
+id = "I1cGdTPa60nvnofzMRwIL"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-waxing.png"
+type = "image"
+title = "Service waxing"
+
+[[generated]]
+id = "NTdjhulDKof4W2MM43QmN"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-bleach.png"
+type = "image"
+title = "Service bleach"
+
+[[generated]]
+id = "rS-0SnC77lzDqZYZ4wtp8"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-blowdry.png"
+type = "image"
+title = "Service blowdry"
+
+[[generated]]
+id = "X18ANyjmnp8jxAs3cJjJ0"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-wavy.png"
+type = "image"
+title = "Service wavy hair"
+
+[[generated]]
+id = "emRKitxo-O9ImtSnC7qVN"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-eyebrow.png"
+type = "image"
+title = "Service eyebrow"
+
+[[generated]]
+id = "MCPl0x6pVJDgbg6pJ1xPS"
+uri = "file://artifacts/fatima-sultana-salon/public/images/service-facial.png"
+type = "image"
+title = "Service facial"
