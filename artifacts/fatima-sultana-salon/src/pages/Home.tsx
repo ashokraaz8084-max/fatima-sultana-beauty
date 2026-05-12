@@ -184,11 +184,15 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="relative min-h-[100dvh] flex items-center pt-20 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary -z-20"></div>
-        
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/8 via-background to-secondary/60 -z-20"></div>
+        {/* Luxury background pattern */}
+        <div className="absolute inset-0 opacity-[0.025] -z-10" style={{backgroundImage: "repeating-linear-gradient(45deg, hsl(340,60%,72%) 0, hsl(340,60%,72%) 1px, transparent 0, transparent 50%)", backgroundSize: "20px 20px"}} />
         {/* Decorative elements */}
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-accent/10 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute top-1/4 left-10 w-80 h-80 bg-primary/12 rounded-full blur-3xl -z-10 animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-10 w-[28rem] h-[28rem] bg-accent/10 rounded-full blur-3xl -z-10"></div>
+        <div className="absolute top-10 right-1/3 w-48 h-48 bg-primary/6 rounded-full blur-2xl -z-10"></div>
+        {/* Gold thin line at top */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
         
         <div className="container mx-auto px-6 py-12 md:py-24 grid md:grid-cols-2 gap-12 items-center">
           <motion.div 
@@ -257,6 +261,30 @@ export default function Home() {
           <ChevronDown className="w-8 h-8 text-primary/60" />
         </div>
       </section>
+
+      {/* Luxury Marquee Strip */}
+      <div className="bg-gradient-to-r from-[#c25b7a] via-primary to-[#d4789a] py-3 overflow-hidden">
+        <div className="flex gap-0 animate-[marquee_30s_linear_infinite] whitespace-nowrap w-max">
+          {[...Array(6)].map((_, i) => (
+            <div key={i} className="flex items-center gap-8 px-8 text-white/90 text-xs uppercase tracking-[0.2em] font-semibold">
+              <span>Henna Design</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Hair Styling</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Waxing</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Facial Care</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Blow Dry</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Eyebrow &amp; Lashes</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+              <span>Home Service Available</span>
+              <Star className="w-3 h-3 fill-white/60 text-white/60 shrink-0" />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* About Section */}
       <section id="about" className="py-24 bg-white relative">
@@ -330,28 +358,40 @@ export default function Home() {
             <p className="text-muted-foreground font-light text-lg">Experience our curated selection of luxury beauty treatments designed to enhance your natural radiance.</p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, i) => (
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
                 key={i}
+                className="group"
               >
-                <Card className="overflow-hidden border-none shadow-sm hover:shadow-xl transition-all duration-300 group bg-white h-full">
-                  <div className="h-48 overflow-hidden relative">
-                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors z-10"></div>
+                <div className="overflow-hidden rounded-3xl border border-primary/10 shadow-md hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 bg-white h-full flex flex-col">
+                  <div className="h-52 overflow-hidden relative">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent z-10" />
                     <img src={service.img} alt={service.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
-                  </div>
-                  <CardContent className="p-6 relative">
-                    <div className="absolute -top-6 right-6 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center z-20 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                       {service.icon}
+                    {/* Gold icon badge overlaid on image */}
+                    <div className="absolute bottom-4 left-4 z-20 w-10 h-10 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg flex items-center justify-center border border-accent/30 group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+                      <span className="group-hover:text-white transition-colors text-accent">{service.icon}</span>
                     </div>
-                    <h4 className="font-serif text-xl mb-2 text-foreground group-hover:text-primary transition-colors">{service.title}</h4>
-                    <p className="text-sm text-muted-foreground font-light leading-relaxed">{service.description}</p>
-                  </CardContent>
-                </Card>
+                  </div>
+                  <div className="p-5 flex flex-col flex-1">
+                    <h4 className="font-serif text-lg mb-2 text-foreground group-hover:text-primary transition-colors font-semibold">{service.title}</h4>
+                    <p className="text-xs text-muted-foreground font-light leading-relaxed flex-1">{service.description}</p>
+                    <div className="mt-4 pt-4 border-t border-border/40 flex items-center justify-between">
+                      <span className="text-xs uppercase tracking-widest text-primary/70 font-semibold">Book Now</span>
+                      <button
+                        onClick={() => window.open('https://wa.me/971581191176', '_blank')}
+                        className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary transition-colors group/btn"
+                        data-testid={`service-book-${i}`}
+                      >
+                        <FaWhatsapp className="w-4 h-4 text-primary group-hover/btn:text-white transition-colors" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -359,118 +399,201 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section id="pricing" className="py-24 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <h2 className="text-sm uppercase tracking-widest text-primary font-semibold mb-4">Investment in Beauty</h2>
-            <h3 className="text-4xl md:text-5xl font-serif text-foreground mb-6">Our Price List</h3>
-            <p className="text-muted-foreground font-light text-lg">Transparent pricing for our premium services. Exceptional value for exquisite results.</p>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-            {/* Column 1 */}
-            <div className="space-y-10">
-              {/* Henna */}
-              <div>
-                <h4 className="font-serif text-2xl text-primary border-b border-primary/20 pb-2 mb-6 flex items-center gap-2">
-                  <Star className="w-5 h-5" /> Henna Design
-                </h4>
-                <div className="flex justify-between items-center py-3 border-b border-border/50 hover:bg-secondary/50 px-2 transition-colors rounded">
-                  <span className="font-medium">Starting from</span>
-                  <span className="font-serif text-primary font-semibold">25 - 300 AED</span>
-                </div>
-              </div>
-              
-              {/* Waxing */}
-              <div>
-                <h4 className="font-serif text-2xl text-primary border-b border-primary/20 pb-2 mb-6 flex items-center gap-2">
-                  <Droplet className="w-5 h-5" /> Waxing
-                </h4>
-                {[
+      <section id="pricing" className="py-28 relative overflow-hidden" style={{background: "linear-gradient(135deg, hsl(340,30%,98%) 0%, hsl(0,0%,100%) 50%, hsl(38,60%,98%) 100%)"}}>
+        {/* Decorative corner ornaments */}
+        <div className="absolute top-0 left-0 w-72 h-72 bg-primary/4 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-72 h-72 bg-accent/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <div className="inline-flex items-center gap-3 mb-5">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-accent/60" />
+              <span className="text-xs uppercase tracking-[0.25em] text-accent font-semibold">Investment in Beauty</span>
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-accent/60" />
+            </div>
+            <h3 className="text-4xl md:text-5xl font-serif text-foreground mb-4">Our Price List</h3>
+            <p className="text-muted-foreground font-light text-lg">Transparent pricing for our premium services. Exceptional value, exquisite results.</p>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Card 1: Henna */}
+            {[
+              {
+                icon: <Star className="w-5 h-5" />, title: "Henna Design", items: [
+                  { name: "Elegant (Simple)", price: "25 AED" },
+                  { name: "Classic", price: "50 AED" },
+                  { name: "Detailed", price: "100 AED" },
+                  { name: "Premium", price: "150 AED" },
+                  { name: "Luxury", price: "200 AED" },
+                  { name: "Bridal", price: "300 AED" },
+                ]
+              },
+              {
+                icon: <Droplet className="w-5 h-5" />, title: "Waxing", items: [
                   { name: "Full Hand Wax", price: "70 AED" },
                   { name: "Half Hand Wax", price: "25 AED" },
                   { name: "Full Leg Wax", price: "70 AED" },
                   { name: "Half Leg Wax", price: "25 AED" },
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-center py-3 border-b border-border/50 hover:bg-secondary/50 px-2 transition-colors rounded">
-                    <span className="font-medium text-foreground/80">{item.name}</span>
-                    <span className="font-serif text-primary font-semibold">{item.price}</span>
+                ]
+              },
+              {
+                icon: <Sparkles className="w-5 h-5" />, title: "Beauty Combo", highlight: true, items: [
+                  { name: "Half Leg + Half Hand + Full Face Bleach", price: "55 AED" },
+                ]
+              },
+              {
+                icon: <Scissors className="w-5 h-5" />, title: "Hair Styling & Blow Dry", items: [
+                  { name: "Blow Dry — Short Hair", price: "30 AED" },
+                  { name: "Blow Dry — Long Hair", price: "50 AED" },
+                  { name: "Hair Styling — Fair Hair", price: "30 AED" },
+                  { name: "Full Hair Wavy", price: "80 AED" },
+                  { name: "Half Hair Wavy", price: "50 AED" },
+                ]
+              },
+            ].map((cat, ci) => (
+              <motion.div
+                key={ci}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: ci * 0.1 }}
+                className={`rounded-3xl border ${cat.highlight ? 'border-accent/40 bg-gradient-to-br from-accent/8 to-primary/6' : 'border-primary/10 bg-white'} shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden`}
+              >
+                {/* Card header */}
+                <div className={`px-7 py-5 flex items-center gap-3 border-b ${cat.highlight ? 'border-accent/20 bg-gradient-to-r from-accent/10 to-primary/5' : 'border-primary/8 bg-secondary/40'}`}>
+                  <div className={`w-9 h-9 rounded-xl flex items-center justify-center ${cat.highlight ? 'bg-accent text-white' : 'bg-primary/15 text-primary'}`}>
+                    {cat.icon}
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            {/* Column 2 */}
-            <div className="space-y-10">
-              {/* Combo */}
-              <div>
-                <h4 className="font-serif text-2xl text-primary border-b border-primary/20 pb-2 mb-6 flex items-center gap-2">
-                  <Sparkles className="w-5 h-5" /> Beauty Combo
-                </h4>
-                <div className="flex justify-between items-center py-3 border-b border-border/50 hover:bg-secondary/50 px-2 transition-colors rounded">
-                  <span className="font-medium text-foreground/80 max-w-[70%]">Half Leg + Half Hand + Full Face Bleach</span>
-                  <span className="font-serif text-primary font-semibold">55 AED</span>
+                  <h4 className="font-serif text-xl font-semibold text-foreground">{cat.title}</h4>
+                  {cat.highlight && (
+                    <span className="ml-auto text-xs bg-accent text-white px-3 py-1 rounded-full font-semibold uppercase tracking-wide">Best Value</span>
+                  )}
                 </div>
-              </div>
+                {/* Items */}
+                <div className="px-7 py-4 space-y-0">
+                  {cat.items.map((item, ii) => (
+                    <div key={ii} className="flex justify-between items-center py-3.5 border-b border-border/30 last:border-0 group/item">
+                      <span className="text-sm font-medium text-foreground/75 group-hover/item:text-foreground transition-colors">{item.name}</span>
+                      <span className="font-serif text-primary font-bold text-base ml-4 shrink-0">{item.price}</span>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
-              {/* Hair Styling */}
-              <div>
-                <h4 className="font-serif text-2xl text-primary border-b border-primary/20 pb-2 mb-6 flex items-center gap-2">
-                  <Scissors className="w-5 h-5" /> Hair Styling & Blow Dry
-                </h4>
-                {[
-                  { name: "Blow Dry - Short Hair", price: "30 AED" },
-                  { name: "Blow Dry - Long Hair", price: "50 AED" },
-                  { name: "Hair Styling - Fair Hair", price: "30 AED" },
-                  { name: "Hair Styling - Full Hair Wavy", price: "80 AED" },
-                  { name: "Hair Styling - Half Hair Wavy", price: "50 AED" },
-                ].map((item, i) => (
-                  <div key={i} className="flex justify-between items-center py-3 border-b border-border/50 hover:bg-secondary/50 px-2 transition-colors rounded">
-                    <span className="font-medium text-foreground/80">{item.name}</span>
-                    <span className="font-serif text-primary font-semibold">{item.price}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-          
-          <div className="mt-16 text-center">
-            <p className="text-sm text-muted-foreground italic">* Prices may vary based on specific requirements and hair length/volume. Please consult with our staff before treatment.</p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-12 text-center"
+          >
+            <p className="text-xs text-muted-foreground/70 italic">* Prices may vary based on specific requirements and hair length. Please consult with our staff.</p>
+          </motion.div>
         </div>
       </section>
 
       {/* Home Service Banner */}
-      <section id="home-service" className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-primary/80 -z-20"></div>
-        <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.2),transparent_50%)] -z-10"></div>
-        
-        <div className="container mx-auto px-6 relative z-10 text-center text-primary-foreground">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto"
-          >
-            <div className="inline-flex items-center justify-center p-4 bg-white/20 backdrop-blur-md rounded-full mb-8">
-              <FaMapMarkerAlt className="w-6 h-6 text-white" />
-            </div>
-            <h2 className="text-4xl md:text-5xl font-serif font-medium mb-6 leading-tight">Home Service Available <br/>in Abu Dhabi</h2>
-            <p className="text-lg md:text-xl font-light text-primary-foreground/90 mb-10">
-              We bring luxury beauty services to your doorstep. Book our home service today and experience premium beauty care from the comfort of your home.
-            </p>
-            <p className="text-sm uppercase tracking-widest font-semibold mb-10 opacity-80">Serving Shabiya ME10 & Surrounding Areas</p>
-            
-            <div className="flex flex-col sm:flex-row justify-center gap-6">
-              <Button size="lg" className="h-16 px-8 rounded-full bg-white text-primary hover:bg-secondary hover:scale-105 transition-all text-lg font-semibold shadow-xl" onClick={() => window.open('https://wa.me/971581191176', '_blank')}>
-                <FaWhatsapp className="mr-3 w-6 h-6 text-[#25D366]" /> WhatsApp Home Service
-              </Button>
-              <Button size="lg" variant="outline" className="h-16 px-8 rounded-full border-white/50 text-white hover:bg-white/10 hover:text-white transition-all text-lg" onClick={() => window.open('tel:+971581191176')}>
-                <FaPhoneAlt className="mr-3 w-5 h-5" /> Call: +971 58 119 1176
-              </Button>
-            </div>
-          </motion.div>
+      <section id="home-service" className="relative overflow-hidden">
+        {/* Deep pink gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#c25b7a] via-primary to-[#d4789a]" />
+        {/* Light shimmer overlays */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(255,255,255,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,220,200,0.15),transparent_60%)]" />
+        {/* Decorative circles */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-white/5 border border-white/10" />
+        <div className="absolute -bottom-16 -left-16 w-72 h-72 rounded-full bg-white/5 border border-white/10" />
+        <div className="absolute top-1/2 right-1/4 w-40 h-40 rounded-full bg-white/5" />
+
+        <div className="container mx-auto px-6 py-20 relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left: headline + CTAs */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="text-primary-foreground"
+            >
+              <div className="inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm border border-white/20 px-5 py-2 rounded-full mb-8">
+                <FaMapMarkerAlt className="w-4 h-4 text-white" />
+                <span className="text-sm font-semibold tracking-widest uppercase">Abu Dhabi Home Service</span>
+              </div>
+
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif font-medium leading-tight mb-6">
+                Luxury Beauty <br />
+                <span className="italic opacity-90">at Your Doorstep</span>
+              </h2>
+
+              <p className="text-lg font-light text-white/85 leading-relaxed mb-4 max-w-md">
+                Can't come to us? We come to you. Our skilled beauticians bring the full salon experience — premium products, hygienic tools, and expert care — directly to your home anywhere in Abu Dhabi.
+              </p>
+              <p className="text-sm uppercase tracking-widest font-semibold text-white/60 mb-10">
+                Serving Shabiya ME10 &amp; All Abu Dhabi Areas
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  size="lg"
+                  className="h-14 px-8 rounded-full bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all text-base font-semibold shadow-2xl"
+                  onClick={() => window.open('https://wa.me/971581191176', '_blank')}
+                  data-testid="home-service-whatsapp"
+                >
+                  <FaWhatsapp className="mr-2 w-5 h-5 text-[#25D366]" /> WhatsApp: +971 58 119 1176
+                </Button>
+                <Button
+                  size="lg"
+                  className="h-14 px-8 rounded-full bg-transparent border-2 border-white/60 text-white hover:bg-white/10 transition-all text-base"
+                  onClick={() => window.open('tel:+971581191176')}
+                  data-testid="home-service-call"
+                >
+                  <FaPhoneAlt className="mr-2 w-4 h-4" /> Call Now
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Right: feature tiles */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.15 }}
+              className="grid grid-cols-2 gap-4"
+            >
+              {[
+                { icon: <Sparkles className="w-6 h-6" />, title: "All Services Available", desc: "Full menu of salon treatments at your home" },
+                { icon: <CheckCircle className="w-6 h-6" />, title: "100% Hygienic", desc: "Sterilised tools, disposable covers, clean setup" },
+                { icon: <Star className="w-6 h-6" />, title: "Expert Beauticians", desc: "Trained professionals with years of experience" },
+                { icon: <FaMapMarkerAlt className="w-6 h-6" />, title: "All Abu Dhabi Areas", desc: "Shabiya, Khalifa, Musaffah & more" },
+                { icon: <FaPhoneAlt className="w-5 h-5" />, title: "Easy Booking", desc: "One WhatsApp message is all it takes" },
+                { icon: <FaWhatsapp className="w-6 h-6" />, title: "Quick Response", desc: "We confirm your slot within minutes" },
+              ].map((feat, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.2 + i * 0.08 }}
+                  className="bg-white/12 backdrop-blur-sm border border-white/15 rounded-2xl p-5 hover:bg-white/20 transition-all duration-300 group"
+                >
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white mb-3 group-hover:bg-white/30 transition-colors">
+                    {feat.icon}
+                  </div>
+                  <h4 className="text-white font-semibold text-sm leading-snug mb-1">{feat.title}</h4>
+                  <p className="text-white/65 text-xs font-light leading-relaxed">{feat.desc}</p>
+                </motion.div>
+              ))}
+            </motion.div>
+
+          </div>
         </div>
       </section>
 
