@@ -5,7 +5,6 @@ import { FaWhatsapp, FaPhoneAlt, FaMapMarkerAlt, FaEnvelope } from "react-icons/
 import { Scissors, Droplet, Sparkles, Star, CheckCircle, ChevronDown, Calendar, Menu, X, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,7 +18,6 @@ const bookingSchema = z.object({
   phone: z.string().min(5, "Phone number is required"),
   service: z.string().min(1, "Please select a service"),
   date: z.string().min(1, "Please select a preferred date"),
-  message: z.string().optional(),
 });
 
 type BookingFormValues = z.infer<typeof bookingSchema>;
@@ -45,12 +43,11 @@ export default function Home() {
       phone: "",
       service: "",
       date: "",
-      message: "",
     },
   });
 
   const onSubmit = (data: BookingFormValues) => {
-    const text = `Hi, I would like to book an appointment.\nName: ${data.name}\nPhone: ${data.phone}\nService: ${data.service}\nPreferred Date: ${data.date}\nMessage: ${data.message || 'None'}`;
+    const text = `Hi, I would like to book an appointment.\nName: ${data.name}\nPhone: ${data.phone}\nService: ${data.service}\nPreferred Date: ${data.date}`;
     const encodedText = encodeURIComponent(text);
     window.open(`https://wa.me/971581191176?text=${encodedText}`, '_blank');
     toast({
@@ -81,6 +78,15 @@ export default function Home() {
     "/images/service-eyebrow.png",
     "/images/about.png",
     "/images/service-wavy.png",
+  ];
+
+  const reviews = [
+    { name: "Aisha Al Mansoori", rating: 5, text: "Absolutely amazing experience! The henna design was breathtaking and the staff made me feel like royalty. Will definitely be back.", service: "Henna Design" },
+    { name: "Fatima Khalil", rating: 5, text: "The home service is a game changer. They came to my villa in Shabiya and did a full facial + blow dry. Absolutely professional and hygienic.", service: "Home Service" },
+    { name: "Mariam Al Zaabi", rating: 5, text: "Best blow dry I've ever had in Abu Dhabi. My hair was silky and shiny for days. The salon atmosphere is so elegant and relaxing.", service: "Blow Dry" },
+    { name: "Sara Hassan", rating: 5, text: "I've tried many salons across Abu Dhabi but Fatima Sultana is truly in a class of its own. The beauticians are so skilled and caring.", service: "Facial & Beauty Care" },
+    { name: "Noura Al Rashidi", rating: 5, text: "The waxing service was so gentle and thorough. The ladies are very experienced and the salon is spotlessly clean. Highly recommended!", service: "Waxing" },
+    { name: "Hessa Al Dhaheri", rating: 5, text: "Came for a bridal henna before my wedding and I was speechless. The design was more beautiful than I imagined. Thank you so much!", service: "Henna Design" },
   ];
 
   const scrollToSection = (id: string) => {
@@ -523,6 +529,117 @@ export default function Home() {
         )}
       </AnimatePresence>
 
+      {/* Reviews Section */}
+      <section id="reviews" className="py-28 relative overflow-hidden bg-white">
+        {/* Background decorative blobs */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-2xl mx-auto mb-16"
+          >
+            <div className="inline-flex items-center gap-2 bg-primary/10 px-5 py-2 rounded-full mb-5">
+              <Star className="w-4 h-4 text-accent fill-accent" />
+              <span className="text-sm font-semibold tracking-widest uppercase text-primary">Client Love</span>
+              <Star className="w-4 h-4 text-accent fill-accent" />
+            </div>
+            <h3 className="text-4xl md:text-5xl font-serif text-foreground mb-5">What Our Clients Say</h3>
+            <p className="text-muted-foreground font-light text-lg">Trusted by hundreds of ladies across Abu Dhabi. Here is what they have to say about their experience.</p>
+          </motion.div>
+
+          {/* 5-star summary bar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-14 bg-secondary/50 border border-primary/10 rounded-3xl py-6 px-10 max-w-lg mx-auto shadow-sm"
+          >
+            <div className="text-center">
+              <p className="text-6xl font-serif font-bold text-primary leading-none">5.0</p>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground mt-1">Average Rating</p>
+            </div>
+            <div className="w-px h-12 bg-border/50 hidden sm:block" />
+            <div className="text-center">
+              <div className="flex gap-1 justify-center mb-1">
+                {[1,2,3,4,5].map(i => (
+                  <Star key={i} className="w-6 h-6 text-accent fill-accent" />
+                ))}
+              </div>
+              <p className="text-xs uppercase tracking-widest text-muted-foreground">500+ Happy Clients</p>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {reviews.map((review, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.5, delay: i * 0.1 }}
+                data-testid={`review-card-${i}`}
+              >
+                <div className="relative bg-white rounded-3xl p-8 shadow-md hover:shadow-xl transition-all duration-300 border border-primary/8 h-full flex flex-col group hover:-translate-y-1">
+                  {/* Gold quote mark */}
+                  <span className="absolute -top-4 left-8 text-6xl text-accent/30 font-serif leading-none select-none">"</span>
+
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-5">
+                    {[1,2,3,4,5].map(s => (
+                      <Star key={s} className="w-4 h-4 text-accent fill-accent" />
+                    ))}
+                  </div>
+
+                  {/* Review text */}
+                  <p className="text-foreground/75 font-light leading-relaxed text-sm flex-1 mb-6 italic">
+                    "{review.text}"
+                  </p>
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent mb-5" />
+
+                  {/* Author */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-11 h-11 rounded-full bg-gradient-to-br from-primary/60 to-accent/60 flex items-center justify-center shrink-0 text-white font-serif font-semibold text-lg shadow-sm">
+                      {review.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-foreground font-serif leading-tight">{review.name}</p>
+                      <p className="text-xs text-primary/80 mt-0.5 font-medium tracking-wide">{review.service}</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA below reviews */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="text-center mt-14"
+          >
+            <p className="text-muted-foreground font-light mb-6">Ready to experience the difference yourself?</p>
+            <Button
+              size="lg"
+              className="rounded-full px-10 h-14 text-base font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all"
+              onClick={() => window.open('https://wa.me/971581191176', '_blank')}
+              data-testid="reviews-book-cta"
+            >
+              <FaWhatsapp className="mr-2 w-5 h-5" /> Book Your Appointment
+            </Button>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section id="contact" className="py-24 bg-white border-t border-border/40">
         <div className="container mx-auto px-6">
@@ -647,24 +764,6 @@ export default function Home() {
                           <div className="relative">
                             <Input type="date" className="bg-white border-none shadow-sm h-12 rounded-xl pr-10" {...field} />
                           </div>
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-foreground/80">Additional Notes (Optional)</FormLabel>
-                        <FormControl>
-                          <Textarea 
-                            placeholder="Any specific requests?" 
-                            className="bg-white border-none shadow-sm resize-none rounded-xl min-h-[100px]" 
-                            {...field} 
-                          />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
