@@ -216,8 +216,8 @@ export default function Home() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mt-4 justify-center md:justify-start">
-              <Button size="lg" className="rounded-full text-base px-8 h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all" onClick={() => window.open('https://wa.me/971581191176', '_blank')} data-testid="hero-whatsapp">
-                <FaWhatsapp className="mr-2 w-5 h-5" /> WhatsApp Booking
+              <Button size="lg" className="rounded-full text-base px-8 h-14 bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all" onClick={() => scrollToSection('contact')} data-testid="hero-book-appointment">
+                Book Appointment
               </Button>
               <Button size="lg" variant="outline" className="rounded-full text-base px-8 h-14 border-primary/30 hover:bg-primary/5 transition-all" onClick={() => window.open('tel:+97158619276')} data-testid="hero-call">
                 <FaPhoneAlt className="mr-2 w-4 h-4 text-primary" /> Call Now
